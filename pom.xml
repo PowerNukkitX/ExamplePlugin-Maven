@@ -45,9 +45,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.powernukkitx</groupId>
+            <groupId>com.github.powernukkitx</groupId>
             <artifactId>powernukkitx</artifactId>
-            <version>1.6.0.0-PNX-SNAPSHOT</version>
+            <version>1.6.0.0-PNX</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
