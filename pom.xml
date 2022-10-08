@@ -20,7 +20,7 @@
         <dependency>
             <groupId>cn.powernukkitx</groupId>
             <artifactId>powernukkitx</artifactId>
-            <version>1.6.0.0-PNX</version>
+            <version>1.19.30-r2</version>
         </dependency>
     </dependencies>
 
@@ -40,5 +40,4 @@
         </plugins>
     </build>
 
-    
 </project>
