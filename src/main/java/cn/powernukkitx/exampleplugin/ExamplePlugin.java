@@ -1,5 +1,8 @@
 package cn.powernukkitx.exampleplugin;
 
+import cn.nukkit.Server;
+import cn.nukkit.lang.PluginI18n;
+import cn.nukkit.lang.PluginI18nManager;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
 import cn.nukkit.utils.ConfigSection;
@@ -13,9 +16,19 @@ import java.util.LinkedHashMap;
  * NukkitExamplePlugin Project
  */
 public class ExamplePlugin extends PluginBase {
+    public static ExamplePlugin INSTANCE;
+    public static PluginI18n I18N;
+
 
     @Override
     public void onLoad() {
+        //save Plugin Instance
+        INSTANCE = this;
+        //register the plugin i18n
+        I18N = PluginI18nManager.register(this);
+        //register the command of plugin
+        this.getServer().getCommandMap().register("exampleplugin", new ExampleCommand());
+
         this.getLogger().info(TextFormat.WHITE + "I've been loaded!");
     }
 
@@ -23,6 +36,9 @@ public class ExamplePlugin extends PluginBase {
     public void onEnable() {
         this.getLogger().info(TextFormat.DARK_GREEN + "I've been enabled!");
         this.getLogger().info(String.valueOf(this.getDataFolder().mkdirs()));
+
+        //Use the plugin's i18n output
+        this.getLogger().info(I18N.tr(Server.getInstance().getLanguageCode(), "exampleplugin.helloworld", "世界"));
 
         //Register the EventListener
         this.getServer().getPluginManager().registerEvents(new EventListener(this), this);

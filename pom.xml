@@ -15,12 +15,19 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://www.jitpack.io</url>
+        </repository>
+    </repositories>
          
     <dependencies>
         <dependency>
             <groupId>cn.powernukkitx</groupId>
             <artifactId>powernukkitx</artifactId>
-            <version>1.19.60-r1</version>
+            <version>1.19.62-r1</version>
         </dependency>
     </dependencies>
 

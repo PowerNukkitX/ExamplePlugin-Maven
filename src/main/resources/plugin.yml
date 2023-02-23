@@ -1,4 +1,3 @@
-
 #name, main, version and api are required
 name: ExamplePlugin
 main: cn.powernukkitx.exampleplugin.ExamplePlugin
@@ -19,19 +18,3 @@ softdepend: ["PluginA", "PluginB"]
 prefix: "Example"
 # Plugin will be loaded before these. Any cyclic loadbefore's or dependencies's will throw errors!
 loadbefore: ["ImportantPlugin"]
-
-commands:
-  example:
-    description: Example command
-    usage: "/example"
-    aliases: ["xample", "nukkitexample"]
-    permission: exampleplugin.command.example
-    permission-message: "You do not have the required permission to run /example"
-permissions:
-  exampleplugin.command.example:
-    description: "Allows the user to run the example command"
-    default: true
-#   children:
-#     exampleplugin.command.example.test:
-#       description: "Use the test feature in the example command"
-#       default: true

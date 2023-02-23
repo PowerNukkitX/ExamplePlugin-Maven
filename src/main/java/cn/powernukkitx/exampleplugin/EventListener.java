@@ -25,32 +25,34 @@ public class EventListener implements Listener {
         this.plugin.getLogger().info("ServerCommandEvent is called!");
         //you can do more here!
     }
-    @EventHandler(priority = EventPriority.NORMAL)
-    public void onPlayerMove(PlayerMoveEvent event) {
-        event.setCancelled();
-    }
+
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerJoin(PlayerJoinEvent event) {
-        this.plugin.getLogger().info(integer.getAndIncrement()+":PlayerJoinEvent");
+        this.plugin.getLogger().info(integer.getAndIncrement() + ":PlayerJoinEvent");
     }
+
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerAsyncPreLogin(PlayerAsyncPreLoginEvent event) {
-        this.plugin.getLogger().info(integer.getAndIncrement()+":PlayerAsyncPreLoginEvent");
+        this.plugin.getLogger().info(integer.getAndIncrement() + ":PlayerAsyncPreLoginEvent");
     }
+
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerLoginEvent(PlayerLoginEvent event) {
-        this.plugin.getLogger().info(integer.getAndIncrement()+":PlayerLoginEvent");
+        this.plugin.getLogger().info(integer.getAndIncrement() + ":PlayerLoginEvent");
     }
+
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerPreLoginEvent(PlayerPreLoginEvent event) {
-        this.plugin.getLogger().info(integer.getAndIncrement()+":PlayerPreLoginEvent");
+        this.plugin.getLogger().info(integer.getAndIncrement() + ":PlayerPreLoginEvent");
     }
+
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerLocallyInitialized(PlayerLocallyInitializedEvent event) {
-        this.plugin.getLogger().info(integer.getAndIncrement()+":PlayerLocallyInitializedEvent");
+        this.plugin.getLogger().info(integer.getAndIncrement() + ":PlayerLocallyInitializedEvent");
     }
+
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerRespawn(PlayerRespawnEvent event) {
-        this.plugin.getLogger().info(integer.getAndIncrement()+":PlayerRespawnEvent");
+        this.plugin.getLogger().info(integer.getAndIncrement() + ":PlayerRespawnEvent");
     }
 }

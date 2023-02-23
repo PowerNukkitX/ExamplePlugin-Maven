@@ -3,3 +3,5 @@
 # Support for multilingual text of parameters,such as
 # testplugin.helloworld=Hello {%0}!
 # {%n} will be populated with arguments with index n
+exampleplugin.helloworld=Hello {%0}!
+exampleplugin.examplecommand.description=this is a test command.
