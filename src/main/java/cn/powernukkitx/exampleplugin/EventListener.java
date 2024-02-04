@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class EventListener implements Listener {
     private final ExamplePlugin plugin;
-    private AtomicInteger integer = new AtomicInteger(1);
+    private final AtomicInteger integer = new AtomicInteger(1);
 
     public EventListener(ExamplePlugin plugin) {
         this.plugin = plugin;

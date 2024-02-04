@@ -19,7 +19,6 @@ public class ExamplePlugin extends PluginBase {
     public static ExamplePlugin INSTANCE;
     public static PluginI18n I18N;
 
-
     @Override
     public void onLoad() {
         //save Plugin Instance
