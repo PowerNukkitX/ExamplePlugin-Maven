@@ -3,7 +3,7 @@ name: ExamplePlugin
 main: cn.powernukkitx.exampleplugin.ExamplePlugin
 #remember version and api is string, don't write it like this: 1.0.0, or there will be an exception
 version: "1.0.0"
-api: ["1.0.0"]
+api: [ "2.0.0" ]
 load: POSTWORLD
 author: Nukkit Project
 # Authors and author will be added together in one list.

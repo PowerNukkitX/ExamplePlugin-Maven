@@ -1,0 +1,7 @@
+item.powernukkitx:pnx_armor=PNX ARMOR
+item.powernukkitx:test_sward=PNX TEST ARMOR
+item.powernukkitx:amethyst_pickaxe=amethyst pickaxe
+tile.powernukkitx:redstoneluckyblock.name=红石幸运方块
+tile.powernukkitx:blue_mahoe_slab.name=发光蓝盈木板
+item.spawn_egg.entity.feral:boar.name=Spawn boar
+entity.feral:boar.name=boar

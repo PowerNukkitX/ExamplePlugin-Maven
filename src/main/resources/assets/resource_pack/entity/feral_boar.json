@@ -1,0 +1,44 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "powernukkitx:boar",
+      "min_engine_version": "1.8.0",
+      "materials": {
+        "default": "pig"
+      },
+      "textures": {
+        "default": "textures/entity/feral_boar",
+        "saddled": "textures/entity/feral_boar"
+      },
+      "geometry": {
+        "default": "geometry.feral_boar"
+      },
+      "animations": {
+        "setup": "animation.pig.setup",
+        "walk": "animation.quadruped.walk",
+        "look_at_target": "animation.common.look_at_target",
+        "baby_transform": "animation.pig.baby_transform"
+      },
+      "scripts": {
+        "animate": [
+          "setup",
+          {
+            "walk": "query.modified_move_speed"
+          },
+          "look_at_target",
+          {
+            "baby_transform": "query.is_baby"
+          }
+        ]
+      },
+      "render_controllers": [
+        "controller.render.pig"
+      ],
+      "spawn_egg": {
+        "texture": "boar",
+        "texture_index": 0
+      }
+    }
+  }
+}

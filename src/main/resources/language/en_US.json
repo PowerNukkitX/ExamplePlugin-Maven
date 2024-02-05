@@ -1,0 +1,4 @@
+{
+  "exampleplugin.helloworld": "Hello {%0}!",
+  "exampleplugin.examplecommand.description": "this is a test command."
+}

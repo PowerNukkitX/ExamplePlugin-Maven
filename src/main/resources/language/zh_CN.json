@@ -1,0 +1,4 @@
+﻿{
+  "exampleplugin.helloworld": "你好 {%0}!",
+  "exampleplugin.examplecommand.description": "这是一个测试命令。"
+}

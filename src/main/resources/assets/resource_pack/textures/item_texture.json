@@ -1,0 +1,15 @@
+{
+  "resource_pack_name": "vanilla",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "pnx_armor": {
+      "textures": "textures/items/pnx_armor"
+    },
+    "test_sward": {
+      "textures": "textures/items/test_sward"
+    },
+    "amethyst_pickaxe": {
+      "textures": "textures/items/amethyst_pickaxe"
+    }
+  }
+}

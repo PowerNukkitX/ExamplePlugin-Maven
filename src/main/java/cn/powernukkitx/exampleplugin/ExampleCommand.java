@@ -9,7 +9,10 @@ import cn.nukkit.command.data.CommandParameter;
 import cn.nukkit.command.tree.ParamList;
 import cn.nukkit.command.tree.node.PlayersNode;
 import cn.nukkit.command.utils.CommandLogger;
+import cn.nukkit.entity.Entity;
 import cn.nukkit.utils.TextFormat;
+import cn.powernukkitx.exampleplugin.customentity.MyHuman;
+import cn.powernukkitx.exampleplugin.customentity.MyPig;
 
 import java.util.List;
 import java.util.Map;
@@ -50,6 +53,9 @@ public class ExampleCommand extends PluginCommand<ExamplePlugin> {
                 CommandParameter.newType("player", false, CommandParamType.TARGET, new PlayersNode()),
                 CommandParameter.newType("message", true, CommandParamType.STRING)
         });
+        this.getCommandParameters().put("spawn", new CommandParameter[]{
+                CommandParameter.newEnum("enum2", false, new CommandEnum("spawn", "spawn")),
+        });
         /*
          * You'll find two `execute()` methods,
          * where `boolean execute()` is the old NK method,
@@ -75,6 +81,14 @@ public class ExampleCommand extends PluginCommand<ExamplePlugin> {
     public int execute(CommandSender sender, String commandLabel, Map.Entry<String, ParamList> result, CommandLogger log) {
         var list = result.getValue();
         switch (result.getKey()) {
+            case "spawn" -> {
+                ExamplePlugin.INSTANCE.getLogger().info("spawn custom entity");
+                if (sender.isPlayer()) {
+                    Player player = sender.asPlayer();
+                    new MyPig(player.getChunk(), Entity.getDefaultNBT(player)).spawnToAll();
+                    new MyHuman(player.getChunk(), Entity.getDefaultNBT(player)).spawnToAll();
+                }
+            }
             case "pattern1" -> {
                 System.out.println("execute say1");
             }

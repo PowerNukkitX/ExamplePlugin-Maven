@@ -1,23 +1,31 @@
 package cn.powernukkitx.exampleplugin;
 
+import cn.nukkit.entity.Entity;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.*;
 import cn.nukkit.event.server.ServerCommandEvent;
+import cn.powernukkitx.exampleplugin.customentity.MyHuman;
+import cn.powernukkitx.exampleplugin.customentity.MyPig;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * author: MagicDroidX
- * NukkitExamplePlugin Project
- */
 public class EventListener implements Listener {
     private final ExamplePlugin plugin;
     private final AtomicInteger integer = new AtomicInteger(1);
 
     public EventListener(ExamplePlugin plugin) {
         this.plugin = plugin;
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void onChat(PlayerChatEvent event) {
+        if (event.getMessage().contains("test")) {
+            System.out.println("spawn custom entities");
+            new MyPig(event.getPlayer().getChunk(), Entity.getDefaultNBT(event.getPlayer())).spawnToAll();
+            new MyHuman(event.getPlayer().getChunk(), Entity.getDefaultNBT(event.getPlayer())).spawnToAll();
+        }
     }
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = false) //DON'T FORGET THE ANNOTATION @EventHandler
