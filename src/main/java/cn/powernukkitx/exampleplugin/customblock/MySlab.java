@@ -37,7 +37,6 @@ public class MySlab extends BlockTransparent implements CustomBlock {
     public CustomBlockDefinition getDefinition() {
         return CustomBlockDefinition
                 .builder(this)
-                .clientFriction(0.1f)
                 .texture("blue_mahoe_planks")
                 .geometry(new Geometry("geometry.custom_slab")
                         .boneVisibility("lower", true)
@@ -50,7 +49,7 @@ public class MySlab extends BlockTransparent implements CustomBlock {
                                         .boneVisibility("lower", true)
                                         .boneVisibility("upper", false))
                                 .build(),
-                                "query.block_property('bridge:top_slot_bit') == false && query.block_property('bridge:is_full_bit') == false"),
+                                "q.block_state('bridge:top_slot_bit') == false && q.block_state('bridge:is_full_bit') == false"),
                         new Permutation(Component.builder()
                                 .collisionBox(new CollisionBox(-8, 8, -8, 16, 16, 16))
                                 .selectionBox(new SelectionBox(-8, 8, -8, 16, 16, 16))
@@ -58,7 +57,7 @@ public class MySlab extends BlockTransparent implements CustomBlock {
                                         .boneVisibility("lower", false)
                                         .boneVisibility("upper", true))
                                 .build(),
-                                "query.block_property('bridge:top_slot_bit') == true && query.block_property('bridge:is_full_bit') == false"),
+                                "q.block_state('bridge:top_slot_bit') == true && q.block_state('bridge:is_full_bit') == false"),
                         new Permutation(Component.builder()
                                 .collisionBox(new CollisionBox(-8, 0, -8, 16, 16, 16))
                                 .selectionBox(new SelectionBox(-8, 0, -8, 16, 16, 16))
@@ -66,7 +65,7 @@ public class MySlab extends BlockTransparent implements CustomBlock {
                                         .boneVisibility("lower", true)
                                         .boneVisibility("upper", true))
                                 .build(),
-                                "query.block_property('bridge:is_full_bit') == true")
+                                "q.block_state('bridge:is_full_bit') == true")
                 )
                 .build();
     }
@@ -78,7 +77,7 @@ public class MySlab extends BlockTransparent implements CustomBlock {
 
     @Override
     public double getFrictionFactor() {
-        return 0.9;
+        return 0.8;
     }
 
     @Override
@@ -160,6 +159,6 @@ public class MySlab extends BlockTransparent implements CustomBlock {
             this.getLevel().setBlock(this, this, true);
             return true;
         }
-        return false;
+        return true;
     }
 }

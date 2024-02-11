@@ -31,7 +31,6 @@ public class MyBlock extends Block implements CustomBlock {
         return CustomBlockDefinition
                 .builder(this)
                 .texture("redstoneluckyblock")
-                .clientFriction(0.4f)
                 .transformation(new Transformation(new Vector3(0, 0, 0), new Vector3(1, 1, 1), new Vector3(90, 180, 90)))
                 .breakTime(3)
                 .build();
