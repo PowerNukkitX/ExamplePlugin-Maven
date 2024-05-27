@@ -4,7 +4,10 @@ import cn.nukkit.entity.Entity;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
-import cn.nukkit.event.player.*;
+import cn.nukkit.event.player.PlayerChatEvent;
+import cn.nukkit.event.player.PlayerJoinEvent;
+import cn.nukkit.event.player.PlayerLoginEvent;
+import cn.nukkit.event.player.PlayerRespawnEvent;
 import cn.nukkit.event.server.ServerCommandEvent;
 import cn.powernukkitx.exampleplugin.customentity.MyHuman;
 import cn.powernukkitx.exampleplugin.customentity.MyPig;
@@ -39,24 +42,10 @@ public class EventListener implements Listener {
         this.plugin.getLogger().info(integer.getAndIncrement() + ":PlayerJoinEvent");
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
-    public void onPlayerAsyncPreLogin(PlayerAsyncPreLoginEvent event) {
-        this.plugin.getLogger().info(integer.getAndIncrement() + ":PlayerAsyncPreLoginEvent");
-    }
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerLoginEvent(PlayerLoginEvent event) {
         this.plugin.getLogger().info(integer.getAndIncrement() + ":PlayerLoginEvent");
-    }
-
-    @EventHandler(priority = EventPriority.NORMAL)
-    public void onPlayerPreLoginEvent(PlayerPreLoginEvent event) {
-        this.plugin.getLogger().info(integer.getAndIncrement() + ":PlayerPreLoginEvent");
-    }
-
-    @EventHandler(priority = EventPriority.NORMAL)
-    public void onPlayerLocallyInitialized(PlayerLocallyInitializedEvent event) {
-        this.plugin.getLogger().info(integer.getAndIncrement() + ":PlayerLocallyInitializedEvent");
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
