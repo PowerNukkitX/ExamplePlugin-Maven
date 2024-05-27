@@ -36,7 +36,7 @@
         </repository>
         <repository>
             <id>storehouse-okaeri</id>
-            <url>"https://storehouse.okaeri.eu/repository/maven-public/"</url>
+            <url>https://storehouse.okaeri.eu/repository/maven-public/</url>
         </repository>
     </repositories>
 
