@@ -34,10 +34,6 @@
             <id>opencollab-repository-maven-snapshots</id>
             <url>https://repo.opencollab.dev/maven-snapshots</url>
         </repository>
-        <repository>
-            <id>storehouse-okaeri</id>
-            <url>https://storehouse.okaeri.eu/repository/maven-public/</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -46,6 +42,13 @@
             <groupId>com.github.PowerNukkitX</groupId>
             <artifactId>PowerNukkitX</artifactId>
             <version>master-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>24.0.0</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
