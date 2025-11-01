@@ -1,6 +1,7 @@
-package cn.powernukkitx.exampleplugin;
+package org.powernukkitx.exampleplugin.command;
 
 import cn.nukkit.Player;
+import cn.nukkit.Server;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.PluginCommand;
 import cn.nukkit.command.data.CommandEnum;
@@ -11,8 +12,10 @@ import cn.nukkit.command.tree.node.PlayersNode;
 import cn.nukkit.command.utils.CommandLogger;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.utils.TextFormat;
-import cn.powernukkitx.exampleplugin.customentity.MyHuman;
-import cn.powernukkitx.exampleplugin.customentity.MyPig;
+import org.powernukkitx.exampleplugin.ExamplePlugin;
+import org.powernukkitx.exampleplugin.custom.entity.MyHuman;
+import org.powernukkitx.exampleplugin.custom.entity.MyPig;
+import org.powernukkitx.exampleplugin.event.CustomEvent;
 
 import java.util.List;
 import java.util.Map;
@@ -56,6 +59,7 @@ public class ExampleCommand extends PluginCommand<ExamplePlugin> {
         this.getCommandParameters().put("spawn", new CommandParameter[]{
                 CommandParameter.newEnum("enum2", false, new CommandEnum("spawn", "spawn")),
         });
+        this.getCommandParameters().put("exampleevent", new CommandParameter[]{});
         /*
          * You'll find two `execute()` methods,
          * where `boolean execute()` is the old NK method,
@@ -119,6 +123,13 @@ public class ExampleCommand extends PluginCommand<ExamplePlugin> {
                 } else {
                     log.addMessage(TextFormat.WHITE + "%exampleplugin.helloworld", players.stream().map(Player::getName).toList().toString()).output();
                 }
+            }
+            case "exampleevent" -> {
+                int tick = sender.getLocation().getLevel().getTick();
+                /*
+                 * We call our custom event here
+                 */
+                Server.getInstance().getPluginManager().callEvent(new CustomEvent(tick));
             }
             default -> {
                 return 0;

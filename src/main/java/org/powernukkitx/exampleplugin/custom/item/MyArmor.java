@@ -1,4 +1,4 @@
-package cn.powernukkitx.exampleplugin.customitem;
+package org.powernukkitx.exampleplugin.custom.item;
 
 import cn.nukkit.item.ItemArmor;
 import cn.nukkit.item.customitem.CustomItemDefinition;
@@ -29,7 +29,7 @@ public class MyArmor extends ItemCustomArmor {
 
     @Override
     public int getTier() {
-        return ItemArmor.TIER_DIAMOND;
+        return ItemArmor.WEARABLE_TIER_DIAMOND;
     }
 
     @Override

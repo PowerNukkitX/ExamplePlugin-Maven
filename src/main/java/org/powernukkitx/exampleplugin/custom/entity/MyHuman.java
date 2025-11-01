@@ -1,4 +1,4 @@
-package cn.powernukkitx.exampleplugin.customentity;
+package org.powernukkitx.exampleplugin.custom.entity;
 
 import cn.nukkit.Player;
 import cn.nukkit.entity.EntityIntelligentHuman;
@@ -15,6 +15,7 @@ import cn.nukkit.entity.ai.route.finder.impl.SimpleFlatAStarRouteFinder;
 import cn.nukkit.entity.ai.route.posevaluator.WalkingPosEvaluator;
 import cn.nukkit.entity.ai.sensor.NearestPlayerSensor;
 import cn.nukkit.entity.custom.CustomEntity;
+import cn.nukkit.entity.custom.CustomEntityDefinition;
 import cn.nukkit.entity.data.Skin;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemID;
@@ -67,5 +68,13 @@ public class MyHuman extends EntityIntelligentHuman implements CustomEntity {
                 new SimpleFlatAStarRouteFinder(new WalkingPosEvaluator(), this),
                 this
         );
+    }
+
+    public static CustomEntityDefinition definition() {
+        String IDENTIFIER = "powernukkitx:human";
+        return CustomEntityDefinition.simpleBuilder(IDENTIFIER)
+                .eid(IDENTIFIER)
+                .hasSpawnEgg(false) // defaults to true if not set
+                .build();
     }
 }

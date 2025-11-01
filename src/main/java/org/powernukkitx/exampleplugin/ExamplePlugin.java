@@ -1,25 +1,26 @@
-package cn.powernukkitx.exampleplugin;
+package org.powernukkitx.exampleplugin;
 
 import cn.nukkit.Server;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.lang.PluginI18n;
 import cn.nukkit.lang.PluginI18nManager;
 import cn.nukkit.plugin.PluginBase;
-import cn.nukkit.registry.EntityRegistry;
 import cn.nukkit.registry.RegisterException;
 import cn.nukkit.registry.Registries;
 import cn.nukkit.utils.Config;
 import cn.nukkit.utils.ConfigSection;
 import cn.nukkit.utils.TextFormat;
-import cn.powernukkitx.exampleplugin.customblock.MyBlock;
-import cn.powernukkitx.exampleplugin.customblock.MySlab;
-import cn.powernukkitx.exampleplugin.customench.MyEnchantment1;
-import cn.powernukkitx.exampleplugin.customench.MyEnchantment2;
-import cn.powernukkitx.exampleplugin.customentity.MyHuman;
-import cn.powernukkitx.exampleplugin.customentity.MyPig;
-import cn.powernukkitx.exampleplugin.customitem.MyArmor;
-import cn.powernukkitx.exampleplugin.customitem.MyPickaxe;
-import cn.powernukkitx.exampleplugin.customitem.MySword;
+import org.powernukkitx.exampleplugin.command.ExampleCommand;
+import org.powernukkitx.exampleplugin.custom.block.MyBlock;
+import org.powernukkitx.exampleplugin.custom.block.MySlab;
+import org.powernukkitx.exampleplugin.custom.enchantment.MyEnchantment1;
+import org.powernukkitx.exampleplugin.custom.enchantment.MyEnchantment2;
+import org.powernukkitx.exampleplugin.custom.entity.MyHuman;
+import org.powernukkitx.exampleplugin.custom.entity.MyPig;
+import org.powernukkitx.exampleplugin.custom.item.MyArmor;
+import org.powernukkitx.exampleplugin.custom.item.MyPickaxe;
+import org.powernukkitx.exampleplugin.custom.item.MySword;
+import org.powernukkitx.exampleplugin.event.EventListener;
 
 import java.io.File;
 import java.util.LinkedHashMap;
@@ -28,6 +29,10 @@ public class ExamplePlugin extends PluginBase {
     public static ExamplePlugin INSTANCE;
     public static PluginI18n I18N;
 
+    /*
+     * We have to register items, blocks, enchantments etc on plugin load because we need them before the worlds are loaded.
+     * You cannot register new items or blocks once all plugins are loaded.
+     */
     @Override
     public void onLoad() {
         //save Plugin Instance
@@ -43,8 +48,8 @@ public class ExamplePlugin extends PluginBase {
         try {
             Registries.ITEM.registerCustomItem(this, MyArmor.class, MySword.class, MyPickaxe.class);
             Registries.BLOCK.registerCustomBlock(this, MyBlock.class, MySlab.class);
-            Registries.ENTITY.registerCustomEntity(this, new EntityRegistry.CustomEntityDefinition("powernukkitx:boar", "", false, true), MyPig.class);
-            Registries.ENTITY.registerCustomEntity(this, new EntityRegistry.CustomEntityDefinition("powernukkitx:human", "", false, true), MyHuman.class);
+            Registries.ENTITY.registerCustomEntity(this, MyPig.class);
+            Registries.ENTITY.registerCustomEntity(this, MyHuman.class);
             Enchantment.register(new MyEnchantment1(), new MyEnchantment2());
         } catch (RegisterException e) {
             throw new RuntimeException(e);

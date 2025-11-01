@@ -1,4 +1,4 @@
-package cn.powernukkitx.exampleplugin.customench;
+package org.powernukkitx.exampleplugin.custom.enchantment;
 
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.item.enchantment.EnchantmentType;

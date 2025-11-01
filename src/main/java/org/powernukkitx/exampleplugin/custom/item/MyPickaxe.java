@@ -1,4 +1,4 @@
-package cn.powernukkitx.exampleplugin.customitem;
+package org.powernukkitx.exampleplugin.custom.item;
 
 import cn.nukkit.item.ItemTool;
 import cn.nukkit.item.customitem.CustomItemDefinition;
