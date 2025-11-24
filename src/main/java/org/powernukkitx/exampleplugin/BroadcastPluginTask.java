@@ -1,10 +1,10 @@
-package cn.powernukkitx.exampleplugin;
+package org.powernukkitx.exampleplugin;
 
 import cn.nukkit.scheduler.PluginTask;
 
 /**
  * author: MagicDroidX
- * ExamplePlugin Project
+ * ExamplePlugin Project<
  */
 public class BroadcastPluginTask extends PluginTask<ExamplePlugin> {
 

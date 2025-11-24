@@ -1,4 +1,4 @@
-package cn.powernukkitx.exampleplugin.customblock;
+package org.powernukkitx.exampleplugin.custom.block;
 
 import cn.nukkit.block.Block;
 import cn.nukkit.block.BlockProperties;
