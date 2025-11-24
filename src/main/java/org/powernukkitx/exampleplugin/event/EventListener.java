@@ -9,6 +9,8 @@ import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerLoginEvent;
 import cn.nukkit.event.player.PlayerRespawnEvent;
 import cn.nukkit.event.server.ServerCommandEvent;
+import cn.nukkit.scoreboard.Scoreboard;
+import cn.nukkit.scoreboard.data.DisplaySlot;
 import org.powernukkitx.exampleplugin.ExamplePlugin;
 import org.powernukkitx.exampleplugin.custom.entity.MyHuman;
 import org.powernukkitx.exampleplugin.custom.entity.MyPig;
@@ -41,6 +43,14 @@ public class EventListener implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerJoin(PlayerJoinEvent event) {
         this.plugin.getLogger().info(integer.getAndIncrement() + ":PlayerJoinEvent");
+        /*
+         * Example scoreboard
+         */
+        Scoreboard scoreboard = new Scoreboard("dummy", "Example Scoreboard");
+        scoreboard.addLine("First line", 1);
+        scoreboard.addLine("Second line", 2);
+        scoreboard.addLine("Third line", 3);
+        scoreboard.addViewer(event.getPlayer(), DisplaySlot.SIDEBAR);
     }
 
 

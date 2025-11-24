@@ -2,6 +2,7 @@ package org.powernukkitx.exampleplugin.command;
 
 import cn.nukkit.Player;
 import cn.nukkit.Server;
+import cn.nukkit.block.Block;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.PluginCommand;
 import cn.nukkit.command.data.CommandEnum;
@@ -11,13 +12,30 @@ import cn.nukkit.command.tree.ParamList;
 import cn.nukkit.command.tree.node.PlayersNode;
 import cn.nukkit.command.utils.CommandLogger;
 import cn.nukkit.entity.Entity;
+import cn.nukkit.entity.ai.EntityAI;
+import cn.nukkit.form.element.ElementDivider;
+import cn.nukkit.form.element.ElementHeader;
+import cn.nukkit.form.element.ElementLabel;
+import cn.nukkit.form.element.custom.ElementInput;
+import cn.nukkit.form.element.custom.ElementSlider;
+import cn.nukkit.form.element.simple.ButtonImage;
+import cn.nukkit.form.element.simple.ElementButton;
+import cn.nukkit.form.window.CustomForm;
+import cn.nukkit.form.window.ModalForm;
+import cn.nukkit.form.window.SimpleForm;
+import cn.nukkit.inventory.fake.FakeInventory;
+import cn.nukkit.inventory.fake.FakeInventoryType;
+import cn.nukkit.item.Item;
 import cn.nukkit.utils.TextFormat;
+import org.apache.commons.io.output.TeeWriter;
 import org.powernukkitx.exampleplugin.ExamplePlugin;
 import org.powernukkitx.exampleplugin.custom.entity.MyHuman;
 import org.powernukkitx.exampleplugin.custom.entity.MyPig;
 import org.powernukkitx.exampleplugin.event.CustomEvent;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class ExampleCommand extends PluginCommand<ExamplePlugin> {
@@ -57,9 +75,22 @@ public class ExampleCommand extends PluginCommand<ExamplePlugin> {
                 CommandParameter.newType("message", true, CommandParamType.STRING)
         });
         this.getCommandParameters().put("spawn", new CommandParameter[]{
-                CommandParameter.newEnum("enum2", false, new CommandEnum("spawn", "spawn")),
+                CommandParameter.newEnum("enum2", false, new CommandEnum("spawn", "spawn"))
         });
-        this.getCommandParameters().put("exampleevent", new CommandParameter[]{});
+        this.getCommandParameters().put("exampleevent", new CommandParameter[]{
+                CommandParameter.newEnum("enum2", false, new CommandEnum("exampleevent"))
+        });
+        this.commandParameters.put("event", new CommandParameter[]{
+                CommandParameter.newEnum("event", new String[]{"event"}),
+        });
+        this.commandParameters.put("form", new CommandParameter[]{
+                CommandParameter.newEnum("form", new String[]{"form"}),
+                CommandParameter.newEnum("enum3", new String[]{"simple", "modal", "custom"})
+        });
+
+        this.getCommandParameters().put("inventory", new CommandParameter[]{
+                CommandParameter.newEnum("inventory",  new String[]{"inventory"})
+        });
         /*
          * You'll find two `execute()` methods,
          * where `boolean execute()` is the old NK method,
@@ -124,12 +155,113 @@ public class ExampleCommand extends PluginCommand<ExamplePlugin> {
                     log.addMessage(TextFormat.WHITE + "%exampleplugin.helloworld", players.stream().map(Player::getName).toList().toString()).output();
                 }
             }
-            case "exampleevent" -> {
+            case "event" -> {
                 int tick = sender.getLocation().getLevel().getTick();
                 /*
                  * We call our custom event here
                  */
                 Server.getInstance().getPluginManager().callEvent(new CustomEvent(tick));
+            }
+
+            /*
+             *
+             * FORMS
+             *
+             */
+
+            case "form" -> {
+                if (sender.isPlayer()) {
+                    Player player = sender.asPlayer();
+                    switch (list.getResult(1).toString()) {
+                        case "simple" -> {
+                            SimpleForm simpleForm = new SimpleForm();
+                            simpleForm.title("SimpleForm");
+                            simpleForm.content("Hello. This is the forms content.");
+                            simpleForm.addButton("Button1", (r) -> {
+                                player.sendMessage("You pressed the first button");
+                            });
+                            simpleForm.addElement(new ElementDivider());
+                            simpleForm.addElement(new ElementHeader("Header!!!"));
+                            simpleForm.addButton(new ElementButton("Button2", new ButtonImage(ButtonImage.Type.PATH, "textures/items/apple")), (r) -> {
+                               player.sendMessage("You pressed the second button!");
+                            });
+                            simpleForm.addElement(new ElementLabel("Use a label to add simple text to your forms"));
+                            simpleForm.send(player);
+                            /*
+                             * Updating a form. In this example we will add a new element after three seconds.
+                             */
+                            Server.getInstance().getScheduler().scheduleDelayedTask(() -> {
+                                if(simpleForm.isViewer(player)) {
+                                    simpleForm.addElement(new ElementHeader(TextFormat.RED + "You also can update forms!"));
+                                    simpleForm.sendUpdate(player);
+                                }
+                            }, 60);
+                        }
+                        case "modal" -> {
+                            ModalForm modalForm = new ModalForm();
+                            modalForm.title("ModalForm");
+                            modalForm.content("This is a modal form!");
+                            modalForm.yes(TextFormat.GREEN + "YES", (r) -> {
+                                r.sendMessage("You pressed YES");
+                            });
+                            modalForm.no(TextFormat.RED + "NO", (r) -> {
+                                r.sendMessage("You pressed NO!");
+                            });
+                            modalForm.send(player);
+                        }
+                        case "custom" -> {
+                            CustomForm customForm = new CustomForm();
+                            customForm.title("CustomForm");
+                            customForm.addElement(new ElementSlider("Slider", 0, 10));
+                            customForm.addElement(new ElementDivider());
+                            customForm.addElement(new ElementInput("Input", "This text will show when box is empty.", "DefaultText"));
+                            customForm.addElement(new ElementHeader("Header"));
+                            customForm.onSubmit((p, response) -> {
+                                p.sendMessage("Slider: " +response.getSliderResponse(0));
+                                p.sendMessage("Input: " + response.getInputResponse(2));
+                            });
+                            customForm.send(player);
+                        }
+                        default -> throw new IllegalStateException("Unexpected value: " + list.getResult(0));
+                    }
+                }
+            }
+
+            /*
+             *
+             * FAKE INVENTORIES
+             *
+             */
+
+            case "inventory" -> {
+                if (sender.isPlayer()) {
+                    Player player = sender.asPlayer();
+                    FakeInventory inv = new FakeInventory(FakeInventoryType.DOUBLE_CHEST, "Fake Inventory Title");
+                    inv.setItem(0, Item.get(Item.APPLE)); //First slot
+                    inv.setItem(1, Item.get(Item.DIAMOND)); //Second slot
+                    inv.setItem(9, Item.get(Block.BARRIER)); //Second row, first slot (8 slots of first row + 1)
+
+                    //If you prefer events to lambda, use PlayerTransferItemEvent
+                    inv.setItemHandler(0, (fakeInventory, slot, oldItem, newItem, itemStackRequestActionEvent) -> {
+                        itemStackRequestActionEvent.getPlayer().sendMessage("You clicked the first item!!");
+                    });
+
+                    inv.setDefaultItemHandler((fakeInventory, slot, oldItem, newItem, itemStackRequestActionEvent) -> {
+                        switch (slot) {
+                            case 1 -> {
+                                fakeInventory.setItem(slot, Item.get(Item.EMERALD));
+                            }
+                            default -> {
+                                fakeInventory.close(itemStackRequestActionEvent.getPlayer());
+                            }
+                        }
+                        //Prevent your players from removing the items
+                        itemStackRequestActionEvent.setCancelled();
+                    });
+
+                    //You cannot open two UI elements at the same time. By the time the command is executed, the command screen is still open, so you have to delay the opening of the inventory here.
+                    Server.getInstance().getScheduler().scheduleDelayedTask(() -> player.addWindow(inv), 10);
+                }
             }
             default -> {
                 return 0;
