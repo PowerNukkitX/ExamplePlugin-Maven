@@ -14,7 +14,7 @@ public class MyArmor extends ItemCustomArmor {
     public CustomItemDefinition getDefinition() {
         return CustomItemDefinition
                 .armorBuilder(this)
-                .name("测试盔甲")
+                .name("PNX Armor")
                 .creativeCategory(CreativeCategory.EQUIPMENT)
                 .texture("pnx_armor")
                 .allowOffHand(true)

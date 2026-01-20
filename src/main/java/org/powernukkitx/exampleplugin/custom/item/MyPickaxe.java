@@ -21,7 +21,7 @@ public class MyPickaxe extends ItemCustomTool {
                 .speed(10)
                 .creativeCategory(CreativeCategory.EQUIPMENT)
                 .texture("amethyst_pickaxe")
-                .name("测试镐")
+                .name("Amethyst Pickaxe")
                 .allowOffHand(true)
                 .handEquipped(true)
                 .foil(true)

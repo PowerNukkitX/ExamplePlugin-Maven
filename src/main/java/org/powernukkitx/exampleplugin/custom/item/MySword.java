@@ -16,7 +16,7 @@ public class MySword extends ItemCustomTool {
                 .toolBuilder(this)
                 .creativeCategory(CreativeCategory.EQUIPMENT)
                 .texture("test_sward")
-                .name("测试剑")
+                .name("PNX Sword")
                 .allowOffHand(true)
                 .handEquipped(true)
                 .foil(true)
