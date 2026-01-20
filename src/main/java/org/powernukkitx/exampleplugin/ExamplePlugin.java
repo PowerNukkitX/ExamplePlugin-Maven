@@ -20,6 +20,7 @@ import org.powernukkitx.exampleplugin.custom.entity.MyPig;
 import org.powernukkitx.exampleplugin.custom.item.MyArmor;
 import org.powernukkitx.exampleplugin.custom.item.MyPickaxe;
 import org.powernukkitx.exampleplugin.custom.item.MySword;
+import org.powernukkitx.exampleplugin.custom.recipe.CustomRecipe;
 import org.powernukkitx.exampleplugin.event.EventListener;
 
 import java.io.File;
@@ -51,6 +52,8 @@ public class ExamplePlugin extends PluginBase {
             Registries.ENTITY.registerCustomEntity(this, MyPig.class);
             Registries.ENTITY.registerCustomEntity(this, MyHuman.class);
             Enchantment.register(new MyEnchantment1(), new MyEnchantment2());
+            CustomRecipe.registerAllRecipes();
+
         } catch (RegisterException e) {
             throw new RuntimeException(e);
         }
